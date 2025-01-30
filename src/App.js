@@ -7,21 +7,24 @@ import api from "./services/api";
 function App() {
 
   const [cep, setCep] = useState([]);
+  const [idCep, setId] = useState('')
 
+  const handleChange = (event) => {
+    setId(event.target.value)
+  }
 
-    function fetchData() {
-      fetch('https://cep.awesomeapi.com.br/json/74948440')
-      .then((r) => r.json())
-      .then((cep) => setCep(cep))
-      .catch((error) => console.error("ERRO AO BUSCAR OS DADOS"))
-    }
+  function fetchData() {
+    fetch(`https://cep.awesomeapi.com.br/json/${idCep}`)
+    .then((r) => r.json())
+    .then((cep) => setCep(cep))
+    .catch((error) => console.error("ERRO AO BUSCAR OS DADOS"))
+  }
 
-    console.log(cep)
 
   return (
     <div className="container">
       <div className="input-box">
-        <input placeholder="Digite o cep" onChange={setCep}/>
+        <input placeholder="Digite o cep" onChange={handleChange}/>
         <button onClick={fetchData} >Pesquisar</button>
 
         <div>
